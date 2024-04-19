@@ -1,0 +1,159 @@
+{
+    "Sheets": [
+        {
+            "SheetId": "6a607e65-b90e-49dc-923a-791ce5d252b1_8b8c3117-fbb6-4ee2-8d7f-d084056a55c3",
+            "Name": "Sheet 1",
+            "Visuals": [
+                {
+                    "LineChartVisual": {
+                        "VisualId": "6a607e65-b90e-49dc-923a-791ce5d252b1_71c2da4e-b44f-43e4-9653-946783e83f6f",
+                        "Title": {
+                            "Visibility": "VISIBLE"
+                        },
+                        "Subtitle": {
+                            "Visibility": "VISIBLE"
+                        },
+                        "ChartConfiguration": {
+                            "FieldWells": {
+                                "LineChartAggregatedFieldWells": {
+                                    "Category": [
+                                        {
+                                            "DateDimensionField": {
+                                                "FieldId": "4464601c-5717-47aa-b868-72a91b5a0ee5.timestamp.1.1712657686055",
+                                                "Column": {
+                                                    "DataSetIdentifier": "blog-glue-trigger-refresh-qs-spice",
+                                                    "ColumnName": "timestamp"
+                                                },
+                                                "DateGranularity": "MINUTE",
+                                                "HierarchyId": "f1bcad97-a246-4abd-a094-0e60b1bafef8"
+                                            }
+                                        }
+                                    ],
+                                    "Values": [
+                                        {
+                                            "NumericalMeasureField": {
+                                                "FieldId": "4464601c-5717-47aa-b868-72a91b5a0ee5.metric1.2.1712657686055",
+                                                "Column": {
+                                                    "DataSetIdentifier": "blog-glue-trigger-refresh-qs-spice",
+                                                    "ColumnName": "metric1"
+                                                },
+                                                "AggregationFunction": {
+                                                    "SimpleNumericalAggregation": "SUM"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "Colors": [
+                                        {
+                                            "CategoricalDimensionField": {
+                                                "FieldId": "4464601c-5717-47aa-b868-72a91b5a0ee5.dimension1.0.1712657686055",
+                                                "Column": {
+                                                    "DataSetIdentifier": "blog-glue-trigger-refresh-qs-spice",
+                                                    "ColumnName": "dimension1"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            "SortConfiguration": {
+                                "CategoryItemsLimitConfiguration": {
+                                    "OtherCategories": "INCLUDE"
+                                },
+                                "ColorItemsLimitConfiguration": {
+                                    "OtherCategories": "INCLUDE"
+                                },
+                                "SmallMultiplesLimitConfiguration": {
+                                    "OtherCategories": "INCLUDE"
+                                }
+                            },
+                            "Type": "LINE",
+                            "DataLabels": {
+                                "Visibility": "HIDDEN",
+                                "Overlap": "DISABLE_OVERLAP"
+                            },
+                            "Tooltip": {
+                                "TooltipVisibility": "VISIBLE",
+                                "SelectedTooltipType": "DETAILED",
+                                "FieldBasedTooltip": {
+                                    "AggregationVisibility": "HIDDEN",
+                                    "TooltipTitleType": "PRIMARY_VALUE",
+                                    "TooltipFields": [
+                                        {
+                                            "FieldTooltipItem": {
+                                                "FieldId": "4464601c-5717-47aa-b868-72a91b5a0ee5.timestamp.1.1712657686055",
+                                                "Visibility": "VISIBLE"
+                                            }
+                                        },
+                                        {
+                                            "FieldTooltipItem": {
+                                                "FieldId": "4464601c-5717-47aa-b868-72a91b5a0ee5.metric1.2.1712657686055",
+                                                "Visibility": "VISIBLE"
+                                            }
+                                        },
+                                        {
+                                            "FieldTooltipItem": {
+                                                "FieldId": "4464601c-5717-47aa-b868-72a91b5a0ee5.dimension1.0.1712657686055",
+                                                "Visibility": "VISIBLE"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "Actions": [],
+                        "ColumnHierarchies": [
+                            {
+                                "DateTimeHierarchy": {
+                                    "HierarchyId": "f1bcad97-a246-4abd-a094-0e60b1bafef8",
+                                    "DrillDownFilters": []
+                                }
+                            }
+                        ]
+                    }
+                }
+            ],
+            "Layouts": [
+                {
+                    "Configuration": {
+                        "GridLayout": {
+                            "Elements": [
+                                {
+                                    "ElementId": "6a607e65-b90e-49dc-923a-791ce5d252b1_71c2da4e-b44f-43e4-9653-946783e83f6f",
+                                    "ElementType": "VISUAL",
+                                    "ColumnSpan": 18,
+                                    "RowSpan": 12
+                                }
+                            ],
+                            "CanvasSizeOptions": {
+                                "ScreenCanvasSizeOptions": {
+                                    "ResizeOption": "FIXED",
+                                    "OptimizedViewPortWidth": "1600px"
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "ContentType": "INTERACTIVE"
+        }
+    ],
+    "CalculatedFields": [],
+    "ParameterDeclarations": [],
+    "FilterGroups": [],
+    "AnalysisDefaults": {
+        "DefaultNewSheetConfiguration": {
+            "InteractiveLayoutConfiguration": {
+                "Grid": {
+                    "CanvasSizeOptions": {
+                        "ScreenCanvasSizeOptions": {
+                            "ResizeOption": "FIXED",
+                            "OptimizedViewPortWidth": "1600px"
+                        }
+                    }
+                }
+            },
+            "SheetContentType": "INTERACTIVE"
+        }
+    }
+}
