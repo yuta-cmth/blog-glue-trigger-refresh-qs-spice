@@ -1,0 +1,44 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sts:AssumeRole"
+            ],
+            "Resource": [
+                "arn:aws:iam::*:role/cdk-*"
+            ]
+        },
+        {
+            "Sid": "StartCrawler",
+            "Effect": "Allow",
+            "Action": [
+                "glue:StartCrawler"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "CfnDescribe",
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:DescribeStacks"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "QS",
+            "Effect": "Allow",
+            "Action": [
+                "quicksight:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}

@@ -18,6 +18,39 @@ cd blog-glue-trigger-refresh-qs-spice
 npm i
 ```
 
+# Setup IAM policies and an environment necessary to deploy the resources
+
+See [Calling AWS services from an environment in AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/credentials.html#credentials-temporary) for more information.
+
+```bash
+# Create a role
+aws iam create-role --role-name blog-glue-trigger-refresh-qs-spice-cloud9-instance-role --assume-role-policy-document file://cloud9_iam/trust-policy.json
+
+# Attach policies to the role
+aws iam attach-role-policy --role-name blog-glue-trigger-refresh-qs-spice-cloud9-instance-role --policy-arn arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+aws iam attach-role-policy --role-name blog-glue-trigger-refresh-qs-spice-cloud9-instance-role --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
+aws iam put-role-policy --role-name blog-glue-trigger-refresh-qs-spice-cloud9-instance-role --policy-name blog-glue-trigger-refresh-qs-spice-cloud9-instance-policy --policy-document file://cloud9_iam/inline-policy.json
+# AWSCloud9SSMInstanceProfile
+aws iam create-instance-profile --instance-profile-name blog-glue-trigger-refresh-qs-spice-cloud9-instance-profile
+aws iam add-role-to-instance-profile --instance-profile-name blog-glue-trigger-refresh-qs-spice-cloud9-instance-profile --role-name blog-glue-trigger-refresh-qs-spice-cloud9-instance-role
+
+# Start Cloud9 environment and attach the role to the EC2 instance used by Cloud9
+read -s c9_subnet_id; export c9_subnet_id		# Use your own subnet id.
+read -s c9_owner_arn; export c9_owner_arn		# Use your own owner arn.
+aws cloud9 create-environment-ec2 \
+	--name blog-glue-trigger-refresh-qs-spice-cloud9-environment \
+	--description "Cloud9 environment for blog-glue-trigger-refresh-qs-spice" \
+	--instance-type t2.micro \
+	--automatic-stop-time-minutes 60 \
+	--image-id amazonlinux-2023-x86_64 \
+	--connection-type CONNECT_SSM \
+	--subnet-id $c9_subnet_id \
+	--owner-arn $c9_owner_arn
+
+c9_instance_id=$(aws ec2 describe-instances --filters Name=tag:Name,Values=*blog-glue-trigger-refresh-qs-spice-cloud9-environment* Name=instance-state-name,Values=running --query "Reservations[*].Instances[*].InstanceId" --output text)
+aws ec2 associate-iam-instance-profile --iam-instance-profile Name=blog-glue-trigger-refresh-qs-spice-cloud9-instance-profile --instance-id $c9_instance_id
+```
+
 # Commands to deploy & clean up
 
 ```bash
@@ -125,3 +158,4 @@ aws quicksight describe-dashboard-definition --aws-account-id $AAI --dashboard-i
 - https://aws.amazon.com/blogs/big-data/event-driven-refresh-of-spice-datasets-in-amazon-quicksight/
 - https://community.amazonquicksight.com/t/how-to-move-or-export-and-import-the-dashboard/8262/6
 - https://catalog.us-east-1.prod.workshops.aws/workshops/cd8ebba2-2ef8-431a-8f72-ca7f6761713d/en-US/admin-workshop/7-content-porting
+- https://docs.aws.amazon.com/cloud9/latest/user-guide/credentials.html#credentials-temporary
